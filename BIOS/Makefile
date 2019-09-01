@@ -1,8 +1,12 @@
 # Build the BIOS part using Merlin32
+ASM=Merlin32
+ASMFLAGS=-V /usr/local/includes/merlin32
+LNK=/usr/local/bin/srec_cat
+
 
 BIOS: Init.s Serial.s Vectors.s
-	Merlin32 -V /usr/local/includes/merlin32 BIOS.S
-	srec_cat Init.bin -Binary Serial.bin -Binary -offset 0x0100 Vectors.bin -Binary -offset 0x02fa -Output BIOS.bin -Binary --address-length=2 
+	$(ASM) $(ASMFLAGS) BIOS.S
+	$(LNK) Init.bin -Binary Serial.bin -Binary -offset 0x0100 Vectors.bin -Binary -offset 0x02fa -Output BIOS.bin -Binary --address-length=2 
 
 
 clean: 
