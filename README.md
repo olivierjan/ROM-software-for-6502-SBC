@@ -8,6 +8,8 @@ It Expects a 16k EEPROM starting at $C000 which will contains both
 1. BIOS: Entrypoint at startup or Reset, along with I/O Handlers for 6850. The menu currently displays `[B]asic` and `[M]onitor`, but only Monitor is implemented yet.
     
 2. Monitor: Jeff Tranter's **JMON** ported to the SBC and **Merlin32**
+   
+3. BASIC: **ehBasic** to be compiled also with **Merlin32**
 
 ## Compile 
 
@@ -17,7 +19,7 @@ It Expects a 16k EEPROM starting at $C000 which will contains both
 
 - SRecord EEPROM utilities: In order to assemble the final ROM image, you will need [SRecord](http://srecord.sourceforge.net_). For Mac users, you can get it through `brew`. 
 
-- In order to test the ROM without buring it each time, I used [SYMON](https://github.com/sethm/symon), with a small modification to the Multicomp setup to simulate the SBC.
+- In order to test the ROM without burning it each time, I used [SYMON](https://github.com/sethm/symon), with a small modification to the Multicomp setup to simulate the SBC.
 
 Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompMachine.java`
 
@@ -83,7 +85,7 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
     }   
 
 ## Building the ROM: 
-    cd ROM\ Software
+    
     make clean
     make
 
@@ -92,4 +94,3 @@ This will produce 2 files :
 2. `OJROM.hex`: Intel HEX file format, easier to manipulate with EEPROM burner.
 
 
-Next step: add a BASIC...
