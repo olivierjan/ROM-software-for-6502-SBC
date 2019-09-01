@@ -85,6 +85,11 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
     }   
 
 ## Building the ROM: 
+
+First, you need to chose memory locations and adjust it in the source files and in the makefiles. 
+Offset needs to be defined in each make file for srec_cat to build the correct binary.
+
+You can also select which ACIA you want to build for by editing Serial.s. 
     
     make clean
     make
@@ -93,4 +98,5 @@ This will produce 2 files :
 1. `OJROM.bin`: pure binary file to be used with 6502 Simulator (SYMON)
 2. `OJROM.hex`: Intel HEX file format, easier to manipulate with EEPROM burner.
 
+I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
