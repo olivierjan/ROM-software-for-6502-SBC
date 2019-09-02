@@ -4,3 +4,4 @@ BIOS/_FileInformation.txt
 *.bin
 *.txt
 *.hex
+.vscode
