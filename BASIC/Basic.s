@@ -31,9 +31,6 @@
 ;              fixed conditional LOOP & NEXT cannot find their data strucure on stack
 
 
-                                    DSK		Basic.bin
-						ORG 		$B000
-						TYP 		$06
 ; zero page use ..
 
 ; the following locations are bulk initialized from StrTab at LAB_GMEM
@@ -461,8 +458,8 @@ Ibuffs            = VEC_SV+$16
                                     ; start of input buffer after IRQ/NMI code
 Ibuffe            = Ibuffs+$47      ; end of input buffer
 
-Ram_base          = $0400     ; start of user RAM (set as needed, should be page aligned)
-Ram_top           = $9FFF     ; end of user RAM+1 (set as needed, should be page aligned)
+Ram_base          = RAMBASE     ; start of user RAM (set as needed, should be page aligned)
+Ram_top           = RAMTOP     ; end of user RAM+1 (set as needed, should be page aligned)
 
 Stack_floor       = 16        ; bytes left free on stack for background interrupts
 
