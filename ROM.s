@@ -15,6 +15,9 @@ ACIATYPE            EQU     ACIA6551 ;
 ;ACIATYPE           EQU     ACIA6850 ;
 ROMNAME             EQU     OJROM.bin ;
 
+STACKTOP 				EQU 			#$FF				; Stack goes up to 0x01FF
+
+
 
                     DSK     ROMNAME
                     ORG     ROMSTART
