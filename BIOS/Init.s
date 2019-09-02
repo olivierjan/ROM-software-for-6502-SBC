@@ -8,12 +8,23 @@
 *-------------------------------------------------------------------------------
 
 
-						
+						DSK		Init.bin
+						ORG 		$FD00
+						TYP 		$06
+
 *-------------------------------------------------------------------------------
 *-- External routine definition
 *-------------------------------------------------------------------------------
 
+BIOSCHOUT				EXT
+BIOSCHGET				EXT
+BIOSCFGACIA				EXT
+BIOSCHISCTRLC				EXT
 
+
+MONITOR					EQU			$D900				; Let s see later the Monitor
+BASIC 					EQU			$B000           		; And Basic Entry points
+STACKTOP 				EQU 			#$FF				; Stack goes up to 0x01FF
 
 *-------------------------------------------------------------------------------
 *-- Entry point : Reset Vector
@@ -53,28 +64,15 @@ INITVECTORS										; Store Vectors to I/O functions in RAM
 						BNE 		]LOOP
 
 MENU						LDY		#0				; Initialize counter
-
-						DO 		BASSICSTART & MONITORSTART
-
 ]LOOP						LDA 		STARTUPMESSAGE1,Y		; Get character at counter
 						BEQ		USERINPUT			; If we're done go get user choice
 						JSR		BIOSCHOUT			; else display the character
 						INY						; Move to next character
 						BNE 		]LOOP
-						FIN
-						
-						DO		BASICSTART
-						JMP		BASICSTART
-						FIN
-						
-						DO		MONITORSTART
-						JMP		MONITORSTART
-						FIN
-						
-						JMP		RESET
+
 						
 *-------------------------------------------------------------------------------
-*-- Get and process user choice
+*-- Get and procrss user choice
 *-------------------------------------------------------------------------------
 
 USERINPUT				JSR			BIOSCHGET			; Read user input
@@ -84,8 +82,8 @@ USERINPUT				JSR			BIOSCHGET			; Read user input
 						BEQ		GOBASIC 			; Let's go for BASIC
 						CMP 		#'M'				; MONITOR ?
 						BNE 		RESET 				; Something else ? Restart all...
-						JMP 		MONITORSTART         		; Let's go !
-GOBASIC 					JMP 		BASICSTART			; Jump to BASIC entry point
+						JMP 		MONITOR         		; Let's go !
+GOBASIC 					JMP 		BASIC 				; Jump to BASIC entry point
 
 STARTUPMESSAGE0			ASC 		'-----------------------',0D,0A,'---  OJ',27,'s SBC V0.1  ---',0D,0A,'-----------------------',00
-STARTUPMESSAGE1			ASC 		0D,0A,0D,0A,'       [B]ASIC',0D,0A,'       [M]ONITOR',0D,0A,00
+STARTUPMESSAGE1			ASC 		0D,0A,0D,0A,'    1. [B]ASIC',0D,0A,'    2. [M]ONITOR',0D,0A,00
