@@ -107,7 +107,10 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
 ## Building the ROM: 
 
 First, you need to chose memory locations and adjust it in the ROM.s file. 
-If you don't want to use t
+If you don't want to use Monitor or Basic, simply edit the `BASICSTART` or `MONITORSTART` to be $0000. 
+
+Among other settings, 
+
 Offset needs to be defined in each make file for srec_cat to build the correct binary.
 
 You can also select which ACIA you want to build for by editing Serial.s. 
@@ -124,5 +127,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1Mzg3NTc2M119
+eyJoaXN0b3J5IjpbLTk5NzI0MDkxOV19
 -->
