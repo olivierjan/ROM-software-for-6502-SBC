@@ -20,7 +20,7 @@ The ROM image can be compiled to contain three different software.
  - Monitor: Jeff Tranter's **JMON** adapted to compile with **Merlin32**
  - BASIC: **ehBasic** to be compiled with **Merlin32**
 
-Basic and Monitor inclusion can be chosen 
+BIOS must be part of the ROM image, but Basic and Monitor are optional. 
 
 
 ## Compile 
@@ -115,5 +115,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDE3ODc1NzRdfQ==
+eyJoaXN0b3J5IjpbLTExNjY4MDYxODFdfQ==
 -->
