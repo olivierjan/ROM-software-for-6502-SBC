@@ -13,6 +13,11 @@ Multiple options:
 
 **Constraint**: The reset Vector needs to be at address `$FFFC`
 
+## Which software is included ?
+The ROM image can be compiled to contain three different software. 
+
+ - A 'BIOS'containin
+
 The EEPROM software is currently divided into BIOS and Monitor.
 It Expects a 16k EEPROM starting at $C000 which will contains both
 
@@ -114,5 +119,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4NzM5NTcxN119
+eyJoaXN0b3J5IjpbLTIxMDMxOTIxNDldfQ==
 -->
