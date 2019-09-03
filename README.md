@@ -21,6 +21,12 @@ The ROM image can be compiled to contain three different software.
  - BASIC: **ehBasic** to be compiled with **Merlin32**
 
 BIOS must be part of the ROM image, but Basic and Monitor are optional. 
+The default memory map with both Basic and Monitor is: 
+	
+|RAM|$0000-$9FFF  |
+|--|--|
+|  |  |
+
 
 
 ## Compile 
@@ -115,5 +121,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNjY4MDYxODFdfQ==
+eyJoaXN0b3J5IjpbNDg1NDUxNDYyXX0=
 -->
