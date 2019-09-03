@@ -111,13 +111,10 @@ If you don't want to use Monitor or Basic, simply edit the `BASICSTART` or `MONI
 
 Among other settings, you can select the type of ACIA to use by setting the proper valuer for `ACIATYPE`.
 
-Finally, choose a name for your ROM by editing the valuer of `DSK` directive
-Offset needs to be defined in each make file for srec_cat to build the correct binary.
+Finally, choose a name for your ROM by editing the value of `DSK` directive
 
-You can also select which ACIA you want to build for by editing Serial.s. 
-    
-    make clean
-    make
+Then, simply:    
+    `make clean ; make`
 
 This will produce 2 files :  
 1. `OJROM.bin`: pure binary file to be used with 6502 Simulator (SYMON)
@@ -128,5 +125,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1NDcyNzVdfQ==
+eyJoaXN0b3J5IjpbMTM4NTI2OTA4Nl19
 -->
