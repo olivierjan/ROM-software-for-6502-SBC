@@ -37,7 +37,7 @@ This requires a 20k EEPROM to run and associated decoding logic.
 - Merlin32 Assembler: You can get it for Windows, Mac or Linux from [Brutal Deluxe Software](https://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html). Merlin32 should be in the `PATH` and all the macros from its Library in `/usr/local/includes/merlin32`.
   
 Optional:
-- SRecord EEPROM utilities: In order to convert the ROM image, you will need [SRecord](http://srecord.sourceforge.net_). For Mac users, you can get it through `brew`. 
+- SRecord EEPROM utilities: In order to convert the ROM image to Intel HEX format, you will need [SRecord](http://srecord.sourceforge.net_). For Mac users, you can get it through `brew`. 
 
 - In order to test the ROM without burning it each time, I used [SYMON](https://github.com/sethm/symon), with a small modification to the Multicomp setup to simulate the SBC.
 
@@ -106,7 +106,8 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
 
 ## Building the ROM: 
 
-First, you need to chose memory locations and adjust it in the source files and in the makefiles. 
+First, you need to chose memory locations and adjust it in the ROM.s file. 
+If you don't want to use t
 Offset needs to be defined in each make file for srec_cat to build the correct binary.
 
 You can also select which ACIA you want to build for by editing Serial.s. 
@@ -123,5 +124,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI0ODUzOTQ5NV19
+eyJoaXN0b3J5IjpbMTQ1Mzg3NTc2M119
 -->
