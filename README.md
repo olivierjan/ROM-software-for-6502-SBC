@@ -18,16 +18,10 @@ The ROM image can be compiled to contain three different software.
 
  - BIOS: Entrypoint at startup or Reset, along with I/O Handlers for 6850 or 6551 ACIA. The menu can displays`[B]asic` and/or  `[M]onitor` depending on what is compiled. 
  - Monitor: Jeff Tranter's **JMON** adapted to compile with **Merlin32**
- - BASIC: ehBasic to be co
+ - BASIC: **ehBasic** to be compiled with **Merlin32**
 
-The EEPROM software is currently divided into BIOS and Monitor.
-It Expects a 16k EEPROM starting at $C000 which will contains both
+Basic and Monitor inclusion can be chosen 
 
-1. BIOS: Entrypoint at startup or Reset, along with I/O Handlers for 6850. The menu currently displays `[B]asic` and `[M]onitor`, but only Monitor is implemented yet.
-    
-2. Monitor: Jeff Tranter's **JMON** ported to the SBC and **Merlin32**
-   
-3. BASIC: **ehBasic** to be compiled also with **Merlin32**
 
 ## Compile 
 
@@ -121,5 +115,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzMTEyMzI3OV19
+eyJoaXN0b3J5IjpbLTE0MDE3ODc1NzRdfQ==
 -->
