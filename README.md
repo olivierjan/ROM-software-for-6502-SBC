@@ -120,7 +120,8 @@ This will produce 2 files :
 1. `<YOURROMNAME>.bin`: pure binary file to be used with 6502 Simulator (SYMON)
 2. `<YOURROMNAME>.hex`: Intel HEX file format, easier to manipulate with EEPROM burner.
 
+Now you just need to burn it to EEPROM or any emulator software. 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxMTQxMDMwMV19
+eyJoaXN0b3J5IjpbLTE3MDAyNTY1NjFdfQ==
 -->
