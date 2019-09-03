@@ -25,7 +25,9 @@ The default memory map with both Basic and Monitor is:
 
     $0000-$9FFF		RAM
     $A000-$AFFF		ACIA
-    $B000-
+    $B000-$D8FF		ehBasic
+    $D900-$FCFF		Monitor
+    $FD00-$FFFF		BIOS
 
 
 ## Compile 
@@ -120,5 +122,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2NDg3MDkyNF19
+eyJoaXN0b3J5IjpbLTY2NzM4ODI5OF19
 -->
