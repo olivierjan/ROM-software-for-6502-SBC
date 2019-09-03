@@ -9,7 +9,9 @@ Multiple options:
 
  1. EEPROM: Burn it to an EEPROM to have it permanently available.
  2. Emulator: ROM image to be used by an emulator.
- 3. RAM: it can be uploaded to RAM afte
+ 3. RAM: it can be uploaded to RAM after each boot if the computer supports it. 
+
+Constraint: The reset Vector needs to be 
 
 The EEPROM software is currently divided into BIOS and Monitor.
 It Expects a 16k EEPROM starting at $C000 which will contains both
@@ -112,5 +114,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0NzUyNDI5XX0=
+eyJoaXN0b3J5IjpbOTcxNzg5MjNdfQ==
 -->
