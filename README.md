@@ -36,8 +36,8 @@ This requires a 20k EEPROM to run and associated decoding logic.
 ### Required:
 - Merlin32 Assembler: You can get it for Windows, Mac or Linux from [Brutal Deluxe Software](https://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html). Merlin32 should be in the `PATH` and all the macros from its Library in `/usr/local/includes/merlin32`.
   
-
-- SRecord EEPROM utilities: In order to assemble the final ROM image, you will need [SRecord](http://srecord.sourceforge.net_). For Mac users, you can get it through `brew`. 
+Optional:
+- SRecord EEPROM utilities: In order to convert the ROM image, you will need [SRecord](http://srecord.sourceforge.net_). For Mac users, you can get it through `brew`. 
 
 - In order to test the ROM without burning it each time, I used [SYMON](https://github.com/sethm/symon), with a small modification to the Multicomp setup to simulate the SBC.
 
@@ -123,5 +123,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTU5ODQ2NjgwXX0=
+eyJoaXN0b3J5IjpbLTI0ODUzOTQ5NV19
 -->
