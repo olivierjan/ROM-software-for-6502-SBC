@@ -117,13 +117,10 @@ Then, simply:
     `make clean ; make`
 
 This will produce 2 files :  
-1. `OJROM.bin`: pure binary file to be used with 6502 Simulator (SYMON)
-2. `OJROM.hex`: Intel HEX file format, easier to manipulate with EEPROM burner.
+1. `<YOURROMNAME>.bin`: pure binary file to be used with 6502 Simulator (SYMON)
+2. `<YOURROMNAME>.hex`: Intel HEX file format, easier to manipulate with EEPROM burner.
 
-These are designed for a 20k EEPROM, if you don't have one or your address decoding is not supporting it, you can drop the basic and go for monitor only.
-
-I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4NTI2OTA4Nl19
+eyJoaXN0b3J5IjpbMTcxMTQxMDMwMV19
 -->
