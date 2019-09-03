@@ -16,7 +16,8 @@ Multiple options:
 ## Which software is included ?
 The ROM image can be compiled to contain three different software. 
 
- - A 'BIOS'containin
+ - BIOS: Entrypoint at startup or Reset, along with I/O Handlers for 6850 or 6551 ACIA. The menu can displays`[B]asic` and/or  `[M]onitor`, but only Monitor is implemented yet.
+ - A Monitor: 
 
 The EEPROM software is currently divided into BIOS and Monitor.
 It Expects a 16k EEPROM starting at $C000 which will contains both
@@ -119,5 +120,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMDMxOTIxNDldfQ==
+eyJoaXN0b3J5IjpbMTM5NTcxOTg5MV19
 -->
