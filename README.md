@@ -5,7 +5,11 @@
 In order to get minimum access to our 6502 based computer, we need some basic software. Here is a set of tools designed to provide basic I/Os and programming capability to the computer. 
 
 ## Where to store this software ?
-It depends on the setup
+Multiple options:
+
+ 1. EEPROM: Burn it to an EEPROM to have it permanently available.
+ 2. Emulator: ROM image to be used by an emulator.
+ 3. RAM: it can be uploaded to RAM afte
 
 The EEPROM software is currently divided into BIOS and Monitor.
 It Expects a 16k EEPROM starting at $C000 which will contains both
@@ -108,5 +112,5 @@ These are designed for a 20k EEPROM, if you don't have one or your address decod
 I will try to automate the build, offsets and relocation in the future, but I haven't found how to pass variables to Merlin32...
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NTU5NDk1N119
+eyJoaXN0b3J5IjpbLTg0NzUyNDI5XX0=
 -->
