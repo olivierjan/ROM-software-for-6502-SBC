@@ -3,7 +3,7 @@
 ASM=Merlin32
 ASMFLAGS=-V /usr/local/includes/merlin32
 LNK=/usr/local/bin/srec_cat
-ROMNAME=OJROM
+ROMNAME=JAVA1
 EXEC=$(ROMNAME).bin
 
 

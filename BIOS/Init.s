@@ -88,5 +88,11 @@ USERINPUT				JSR		BIOSCHGET			; Read user input
 						JMP 	MONITORSTART        ; Let's go !
 GOBASIC 				JMP 	BASICSTART			; Jump to BASIC entry point
 
-STARTUPMESSAGE0			ASC 	'-----------------------',0D,0A,'---  OJ',27,'s SBC V0.1  ---',0D,0A,'-----------------------',00
+STARTUPMESSAGE0			HEX		0D0A
+						DS 		17,$20
+						ASC		'JAVA I'
+						DS		17,$20
+						HEX		0D0A00
+
+; STARTUPMESSAGE0			ASC 	'-----------------------',0D,0A,'---  OJ',27,'s SBC V0.1  ---',0D,0A,'-----------------------',00
 STARTUPMESSAGE1			ASC 	0D,0A,0D,0A,'       [B]ASIC',0D,0A,'       [M]ONITOR',0D,0A,00

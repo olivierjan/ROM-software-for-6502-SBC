@@ -10,15 +10,11 @@ ACIA6850            EQU     2 ;
 ROMSTART            EQU     $B000 ; 
 BASICSTART          EQU     $B000 ;
 MONITORSTART        EQU     $D900 ;
-;ROMSTART            EQU     $C000 ;
-;MONITORSTART        EQU     ROMSTART ;
-;BASICSTART          EQU      ; 
 BIOSSTART           EQU     $FD00 ;
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
 ACIASTART           EQU     $A000 ;
 ACIATYPE            EQU     ACIA6551 ;
-;]ROMNAME             =     OJROM.bin ;
 STACKTOP 			EQU 	#$FF				; Stack goes up to 0x01FF
 IRQVECTOR           EQU     $03F0
 RAMBASE             EQU     $0400
@@ -26,7 +22,7 @@ RAMTOP              EQU     $9FFF
 
 
 
-                    DSK     OJROM.bin
+                    DSK     JAVA1.bin
                     ORG     ROMSTART
                     TYP     $06
                     
