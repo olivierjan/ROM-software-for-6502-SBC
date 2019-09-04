@@ -5,44 +5,31 @@
 *--
 *-------------------------------------------------------------------------------
 
-                DSK	  Serial.bin
-                ORG   $FE00
-                TYP   $06
+                
 
-ACIA6551        EQU   1
-ACIA_Base       EQU   $A000          ; ACIA is located at $A000
 
-                DO    ACIA6551
-
+                DO    ACIATYPE = ACIA6551
 TDREBIT         EQU   #%00010000     ; Transmit Data Register Empty bit
 RDRFBIT         EQU   #%00001000     ; Receive Data Buffer Full bit
 ACIAControlbits EQU   #%00011110     ; 1 stop, 8bits, 9600 bauds 
 ACIACommandbits EQU   #%00001011     ;
-
-                ELSE 
-
+ACIA_Control    EQU   ACIASTART + 3  ; Control Register Address
+ACIA_Command    EQU   ACIASTART + 2  ; Command Register Address
+ACIA_Status     EQU   ACIASTART + 1  ; Status Register Address
+ACIA_Data       EQU   ACIASTART      ; TXDATA and RXDATA shares same address
+                FIN
+                
+                DO    ACIATYPE = ACIA6850 
 TDREBIT         EQU   #%00000010     ; Transmit Data Register Empty bit
 RDRFBIT         EQU   #%00000001     ; Receive Data Buffer Full bit
 ACIACONFIG      EQU   #%00010100     ; 8bit + 1 stop
-
+ACIA_Control    EQU   ACIASTART + 0  ; Control and Status Register are at the
+ACIA_Status     EQU   ACIASTART + 0  ; same base address
+ACIA_Data       EQU   ACIASTART + 1  ; TXDATA and RXDATA also sharing address
                 FIN
 
 CTRLCCODE       EQU   #$03           ; Control-C ASCII Code
 
-                DO    ACIA6551
-
-ACIA_Control    EQU   ACIA_Base + 3  ; Control Register Address
-ACIA_Command    EQU   ACIA_Base + 2  ; Command Register Address
-ACIA_Status     EQU   ACIA_Base + 1  ; Status Register Address
-ACIA_Data       EQU   ACIA_Base      ; TXDATA and RXDATA shares same address
-                
-                ELSE
-
-ACIA_Control    EQU   ACIA_Base + 0  ; Control and Status Register are at the
-ACIA_Status     EQU   ACIA_Base + 0  ; same base address
-ACIA_Data       EQU   ACIA_Base + 1  ; TXDATA and RXDATA also sharing address
-
-                FIN
 
 *-------------------------------------------------------------------------------
 *-- BIOSCFGACIA Configure ACIA Speed, bits, etc
@@ -51,17 +38,16 @@ ACIA_Data       EQU   ACIA_Base + 1  ; TXDATA and RXDATA also sharing address
 BIOSCFGACIA     ENT
                 PHA                     ; Save accumulator
 
-                DO    ACIA6551                
+                DO    ACIATYPE = ACIA6551                
                 LDA   ACIAControlbits   ; Load the configuration bit
                 STA   ACIA_Control      ; Send configuration to ACIA
                 LDA   ACIACommandbits   ;
                 STA   ACIA_Command      ;
+                FIN
                 
-                ELSE
-                
+                DO    ACIATYPE = ACIA6850
                 LDA   ACIACONFIG    ; Load the configuration bit
                 STA   ACIA_Control  ; Send configuration to ACIA
-                
                 FIN
                 
                 PLA                     ; Restore Accumulator
@@ -114,6 +100,3 @@ BIOSCHISCTRLC   ENT                   ; Global entry point
                 RTS                   ; Job done, return
 NOTCTRLC        CLC                   ; Clear Carry, we got something else
                 RTS                   ;Job done, return
-
-
-END

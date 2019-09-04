@@ -101,9 +101,7 @@
 
 ; Define if you want the mini-assembler, comment out if not.
 
-                                                DSK		Monitor.bin
-						ORG 		$D900
-						TYP 		$06
+                                                
 
         DUM $0280
 
@@ -150,8 +148,6 @@ ASAV2                           DS 1
 
         DEND
         
-        USE Macros.s
-
 
 
 MINIASM                EQU 1                                                                     ; Yes, we want the mini-assembler
@@ -202,15 +198,13 @@ IN                    EQU $0200               ; Buffer from $0200 through $027F
 
 ; External Routines
 
-BASIC                  EQU $B000               ; BASIC (cold start)
-; BASIC                 EQU $03D0               ; BASIC (cold start with DOS hooks)
-MONITOR               EQU $C000               ; Apple monitor entry point
+BASIC                 EQU BASICSTART          ; BASIC (cold start)
+MONITOR               EQU MONITORSTART        ; Apple monitor entry point
 ECHO                  EQU 1                   ; Need to echo commands
-BRKVECTOR             EQU $03F0             ; Break/interrupt vector (2 bytes)
-; BEEP                  EQU $FBE4               ; Beep the speaker
+BRKVECTOR             EQU $03F0               ; Break/interrupt vector (2 bytes)
 
-BIOSCHGET              EQU $0205
-BIOSCHOUT              EQU $0207 
+; BIOSCHGET              EQU $0205
+; BIOSCHOUT              EQU $0207 
 
 ; Start address.
 
@@ -1508,12 +1502,8 @@ DumpLine
 GetKey
 
                         
-                        ; LDA #>:ret      ; Save return address
-                        ; PHA             ;
-                        ; LDA #<:ret-1    ;
-                        ; PHA             ;
-                        ; JMP (BIOSCHGET)         ; Call the IO Handler to read data
-                        JSR V_IN               ; 
+                        ; JSR V_IN               ;
+                        JSR BIOSCHGET 
 :ret                    BCC GetKey              ; If Carry is clear, no data retrieved, retry. 
                         RTS
 
@@ -1855,25 +1845,13 @@ PRHEX
 PrintChar
                         PHP             ; Save status
                         PHA             ; Save A as it may be changed
-                        ; STX T3          ; Store X 
-                        ; TAX             ; Save A to X
-                        ; LDA #>:ret      ; Save return address
-                        ; PHA             ;
-                        ; LDA #<:ret-1    ;
-                        ; PHA             ;
-                        ; TXA             ; Get A Back from X.
-                        ; LDX T3          ; Restore X
-                        ; JMP (BIOSCHOUT) ; Now that we now where to come back, let's Jump.
-                        JSR V_OUT       ;
+                        JSR BIOSCHOUT
+;                        JSR V_OUT       ;
 :ret                    CMP #CRHEX      ; Is it Return?
                         BNE :ret1        ; If not, return
-                        ; LDA #>:ret1     ; Same as before
-                        ; PHA             ; Saving return address 
-                        ; LDA #<:ret1-1   ; for a safe come back
-                        ; PHA             ;        
                         LDA #LFHEX
-                        ; JMP (BIOSCHOUT)
-                        JSR V_OUT  ;
+;                        JSR V_OUT  ;
+                        JSR BIOSCHOUT
 :ret1
                         PLA             ; Restore A
                         PLP             ; Restore status
@@ -2314,11 +2292,11 @@ ToUpper
                         RTS
 
 ; Strings
-V_OUT
-                        JMP (BIOSCHOUT)         ; Call the BIOS Print
+; V_OUT
+;                       JMP (BIOSCHOUT)         ; Call the BIOS Print
 
-V_IN    
-                        JMP (BIOSCHGET)         ; Call the BIOS Get
+; V_IN    
+;                         JMP (BIOSCHGET)         ; Call the BIOS Get
 WelcomeMessage
 
                         ASC CR,'JMON Monitor 1.3.3 by Jeff Tranter', CR,00
@@ -2387,9 +2365,3 @@ TypeAppleUnknown
 
 ; Non-Page Zero Variables. Note: These must be in RAM. Use a .org
 ; below corresponding to RAM if the program is linked into ROM.
-
-
-
-END
-
-
