@@ -10,6 +10,7 @@ ACIA6850            EQU     2 ;
 ROMSTART            EQU     $B000 ; 
 BASICSTART          EQU     $B000 ;
 MONITORSTART        EQU     $D900 ;
+; MONITORSTART        EQU     $C000 ; 
 BIOSSTART           EQU     $FD00 ;
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
