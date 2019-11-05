@@ -19,19 +19,20 @@ STACKTOP 			EQU 	#$FF				; Stack goes up to 0x01FF
 IRQVECTOR           EQU     $03F0
 RAMBASE             EQU     $0400
 RAMTOP              EQU     $9FFF
-
+HAVEBASIC           EQU     1
+HAVEMONITOR         EQU     1
 
 
                     DSK     JAVA1.bin
                     ORG     ROMSTART
                     TYP     $06
                     
-                DO      BASICSTART
+                DO      HAVEBASIC
                     ORG     BASICSTART
                     PUT     BASIC/Basic.s
                 FIN
                     
-                DO      MONITORSTART
+                DO      HAVEMONITOR
                     DS      MONITORSTART-*,$EA  ; Pad code with NOPs until next code
                     ORG     MONITORSTART
                     USE     MONITOR/jmon.Macs
@@ -43,6 +44,7 @@ RAMTOP              EQU     $9FFF
                     PUT     MONITOR/info.s
                     PUT     MONITOR/delay.s
                 FIN
+
                     DS      BIOSSTART-*,$EA     ; Pad code with NOPs until next code
                     ORG     BIOSSTART
                     PUT     BIOS/Init.s
