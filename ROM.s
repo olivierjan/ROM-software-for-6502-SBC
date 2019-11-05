@@ -8,11 +8,10 @@
 ACIA6551            EQU     1 ;
 ACIA6850            EQU     2 ;
 ROMSTART            EQU     $C000 ; 
-BASICSTART          EQU     $0000 ;
+BASICSTART          EQU     $B000 ;
 ; MONITORSTART        EQU     $D900 ;
 MONITORSTART        EQU     $C000 ; 
 ; BIOSSTART           EQU     $FD00 ;
-BIOSSTART           EQU     $E37F
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
 ACIASTART           EQU     $A000 ;
@@ -21,19 +20,20 @@ STACKTOP 			EQU 	#$FF				; Stack goes up to 0x01FF
 IRQVECTOR           EQU     $03F0
 RAMBASE             EQU     $0400
 RAMTOP              EQU     $9FFF
-
+HAVEBASIC           EQU     1
+HAVEMONITOR         EQU     1
 
 
                     DSK     JAVA1.bin
                     ORG     ROMSTART
                     TYP     $06
                     
-                DO      BASICSTART
+                DO      HAVEBASIC
                     ORG     BASICSTART
                     PUT     BASIC/Basic.s
                 FIN
                     
-                DO      MONITORSTART
+                DO      HAVEMONITOR
                     DS      MONITORSTART-*,$EA  ; Pad code with NOPs until next code
                     ORG     MONITORSTART
                     USE     MONITOR/jmon.Macs
