@@ -7,11 +7,12 @@
 
 ACIA6551            EQU     1 ;
 ACIA6850            EQU     2 ;
-ROMSTART            EQU     $B000 ; 
-BASICSTART          EQU     $B000 ;
-MONITORSTART        EQU     $D900 ;
-; MONITORSTART        EQU     $C000 ; 
-BIOSSTART           EQU     $FD00 ;
+ROMSTART            EQU     $C000 ; 
+BASICSTART          EQU     $0000 ;
+; MONITORSTART        EQU     $D900 ;
+MONITORSTART        EQU     $C000 ; 
+; BIOSSTART           EQU     $FD00 ;
+BIOSSTART           EQU     $E37F
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
 ACIASTART           EQU     $A000 ;
@@ -44,7 +45,10 @@ RAMTOP              EQU     $9FFF
                     PUT     MONITOR/info.s
                     PUT     MONITOR/delay.s
                 FIN
-                    DS      BIOSSTART-*,$EA     ; Pad code with NOPs until next code
+                
+* Pb de retour chariot
+
+                    DS      BIOSSTART-*+3,$EA     ; Pad code with NOPs until next code
                     ORG     BIOSSTART
                     PUT     BIOS/Init.s
                     DS      SERIALSTART-*,$EA   ; Pad code with NOPs until next code
