@@ -7,9 +7,10 @@
 
 ACIA6551            EQU     1 ;
 ACIA6850            EQU     2 ;
-ROMSTART            EQU     $B000 ; 
+ROMSTART            EQU     $C000 ; 
 BASICSTART          EQU     $B000 ;
-MONITORSTART        EQU     $D900 ;
+; MONITORSTART        EQU     $D900 ;
+MONITORSTART        EQU     $C000 ; 
 BIOSSTART           EQU     $FD00 ;
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
@@ -44,6 +45,7 @@ HAVEMONITOR         EQU     1
                     PUT     MONITOR/info.s
                     PUT     MONITOR/delay.s
                 FIN
+
 
                     DS      BIOSSTART-*,$EA     ; Pad code with NOPs until next code
                     ORG     BIOSSTART
