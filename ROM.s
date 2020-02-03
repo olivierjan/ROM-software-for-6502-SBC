@@ -45,10 +45,9 @@ HAVEMONITOR         EQU     1
                     PUT     MONITOR/info.s
                     PUT     MONITOR/delay.s
                 FIN
-                
-* Pb de retour chariot
 
-                    DS      BIOSSTART-*+3,$EA     ; Pad code with NOPs until next code
+
+                    DS      BIOSSTART-*,$EA     ; Pad code with NOPs until next code
                     ORG     BIOSSTART
                     PUT     BIOS/Init.s
                     DS      SERIALSTART-*,$EA   ; Pad code with NOPs until next code
