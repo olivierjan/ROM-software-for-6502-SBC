@@ -11,7 +11,7 @@
                 DO    ACIATYPE = ACIA6551
 TDREBIT         EQU   #%00010000     ; Transmit Data Register Empty bit
 RDRFBIT         EQU   #%00001000     ; Receive Data Buffer Full bit
-ACIAControlbits EQU   #%00011110     ; 1 stop, 8bits, 9600 bauds 
+ACIAControlbits EQU   #%00011111     ; 1 stop, 8bits, 19200 bauds 
 ACIACommandbits EQU   #%00001011     ;
 ACIA_Control    EQU   ACIASTART + 3  ; Control Register Address
 ACIA_Command    EQU   ACIASTART + 2  ; Command Register Address
@@ -60,11 +60,13 @@ BIOSCFGACIA     ENT
 
 BIOSCHOUT       ENT                 ; Global entry point
                 PHA                 ; Save the character on the stack
-SERIALOUTBUSY   LDA   ACIA_Status   ; Get Status from ACIA
-	            AND	  TDREBIT       ; Mask to keep only TDREBIT
-	            CMP	  TDREBIT       ; Check if ACIA is available
-	            BNE	  SERIALOUTBUSY ; If ACIA is not ready, check again
-	            PLA                 ; Restore Character from Stack
+; Due to bug in 6551, following code is commented out.
+SERIALOUTBUSY   ;LDA   ACIA_Status   ; Get Status from ACIA
+	            ;AND	  TDREBIT       ; Mask to keep only TDREBIT
+	            ;CMP	  TDREBIT       ; Check if ACIA is available
+	            ;BNE	  SERIALOUTBUSY ; If ACIA is not ready, check again
+	            JSR   DELAY_6551
+                PLA                 ; Restore Character from Stack
 	            STA	  ACIA_Data     ; Actually send the character to ACIA
 	            RTS                 ; Job done, return
 
@@ -100,3 +102,28 @@ BIOSCHISCTRLC   ENT                   ; Global entry point
                 RTS                   ; Job done, return
 NOTCTRLC        CLC                   ; Clear Carry, we got something else
                 RTS                   ;Job done, return
+
+; Delay routine to work around WDC 65C51 bug
+; Taken from floodybust on 6502.org
+; Latest WDC 65C51 has a bug - Xmit bit in status register is stuck on
+; IRQ driven transmit is not possible as a result - interrupts are endlessly triggered
+; Polled I/O mode also doesn't work as the Xmit bit is polled - delay routine is the only option
+; The following delay routine kills time to allow W65C51 to complete a character transmit
+; 0.523 milliseconds required loop time for 19,200 baud rate
+; MINIDLY routine takes 524 clock cycles to complete - X Reg is used for the count loop
+; Y Reg is loaded with the CPU clock rate in MHz (whole increments only) and used as a multiplier
+;
+DELAY_6551      PHY      ;Save Y Reg
+                PHX      ;Save X Reg
+DELAY_LOOP      LDY   #8   ;Get delay value (clock rate in MHz 2 clock cycles)
+;
+MINIDLY         LDX   #$68      ;Seed X reg
+DELAY_1         DEX         ;Decrement low index
+                BNE   DELAY_1   ;Loop back until done
+;
+                DEY         ;Decrease by one
+                BNE   MINIDLY   ;Loop until done
+                PLX         ;Restore X Reg
+                PLY         ;Restore Y Reg
+DELAY_DONE      RTS         ;Delay done, return
+;

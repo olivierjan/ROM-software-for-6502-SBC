@@ -18,18 +18,18 @@ The ROM image can be compiled to contain three different software.
 
  - BIOS: Entrypoint at startup or Reset, along with I/O Handlers for 6850 or 6551 ACIA. The menu can displays`[B]asic` and/or  `[M]onitor` depending on what is compiled. 
  - Monitor: Jeff Tranter's **JMON** adapted to compile with **Merlin32**
- - BASIC: **ehBasic** to be compiled with **Merlin32**
+ - [REMOVED] BASIC: **ehBasic** to be compiled with **Merlin32**
 
 BIOS must be part of the ROM image, but Basic and Monitor are optional. 
 The default memory map with both Basic and Monitor is: 
 
-    $0000-$9FFF		RAM
-    $A000-$AFFF		ACIA
-    $B000-$D8FF		ehBasic
-    $D900-$FCFF		Monitor
+    $0000-$BFFF		RAM
+    $C100-$C1FF		ACIA
+    $C200-$C2FF		VIA
+    $D000-$FCFF		Monitor
     $FD00-$FFFF		BIOS
 
-This requires a 20k EEPROM to run and associated decoding logic.
+This requires a 16k EEPROM to run and associated decoding logic.
 
 ## Compile 
 
@@ -55,17 +55,17 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
 
       // 40K of RAM from $0000 - $9FFF
       private static final int MEMORY_BASE = 0x0000;
-      private static final int MEMORY_SIZE = 0xA000;
+      private static final int MEMORY_SIZE = 0xC000;
 
       // ACIA at $A000-$BFFF
-      private static final int ACIA_BASE = 0xA000;
+      private static final int ACIA_BASE = 0xC100;
 
       // SD controller at $FFD8-$FFDF
       //private static final int SD_BASE = 0xFFD8;
 
       // 16KB ROM at $C000-$FFFF
-      private static final int ROM_BASE = 0xC000;
-      private static final int ROM_SIZE = 0x4000;
+      private static final int ROM_BASE = 0xD000;
+      private static final int ROM_SIZE = 0x3000;
 
 
           // The simulated peripherals
@@ -80,7 +80,7 @@ Here the modified code from `src/main/java/com/loomcom/symon/machines/MulticompM
           this.bus = new Bus(BUS_BOTTOM, BUS_TOP);
           this.cpu = new Cpu();
           this.ram = new Memory(MEMORY_BASE, MEMORY_BASE + MEMORY_SIZE - 1, false);
-          this.acia = new Acia6850(ACIA_BASE);
+          this.acia = new Acia6551(ACIA_BASE);
           this.acia.setBaudRate(0);
 
           bus.addCpu(cpu);
