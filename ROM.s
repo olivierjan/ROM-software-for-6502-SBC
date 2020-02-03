@@ -7,20 +7,20 @@
 
 ACIA6551            EQU     1 ;
 ACIA6850            EQU     2 ;
-ROMSTART            EQU     $C000 ; 
+ROMSTART            EQU     $D000 ; 
 BASICSTART          EQU     $B000 ;
 ; MONITORSTART        EQU     $D900 ;
-MONITORSTART        EQU     $C000 ; 
+MONITORSTART        EQU     $D000 ; 
 BIOSSTART           EQU     $FD00 ;
 SERIALSTART         EQU     $FE00 ;
 VECTORSTART         EQU     $FFFA ;
-ACIASTART           EQU     $A000 ;
+ACIASTART           EQU     $C100 ;
 ACIATYPE            EQU     ACIA6551 ;
 STACKTOP 			EQU 	#$FF				; Stack goes up to 0x01FF
 IRQVECTOR           EQU     $03F0
 RAMBASE             EQU     $0400
-RAMTOP              EQU     $9FFF
-HAVEBASIC           EQU     1
+RAMTOP              EQU     $BFFF
+HAVEBASIC           EQU     0
 HAVEMONITOR         EQU     1
 
 
@@ -45,7 +45,6 @@ HAVEMONITOR         EQU     1
                     PUT     MONITOR/info.s
                     PUT     MONITOR/delay.s
                 FIN
-
 
                     DS      BIOSSTART-*,$EA     ; Pad code with NOPs until next code
                     ORG     BIOSSTART
